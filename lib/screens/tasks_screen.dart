@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_bloc/blocs/bloc_barrier.dart';
 import 'package:todo_bloc/models/task.dart';
 import 'package:todo_bloc/screens/add_task_screen.dart';
+import 'package:todo_bloc/screens/app_drawer.dart';
 import 'package:todo_bloc/widgets/task_list.dart';
 
 class TasksScreen extends StatefulWidget {
@@ -35,6 +36,7 @@ class _TasksScreenState extends State<TasksScreen> {
             title: const Text("Task App"),
             actions: [IconButton(onPressed: () => _addTask(context), icon: Icon(Icons.add))],
           ),
+          drawer: const AppDrawer(),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

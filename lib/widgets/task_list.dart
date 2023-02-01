@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_bloc/blocs/bloc_barrier.dart';
 import 'package:todo_bloc/models/task.dart';
+import 'package:todo_bloc/widgets/task_tile.dart';
 
 class TaskList extends StatelessWidget {
   const TaskList({
