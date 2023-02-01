@@ -39,6 +39,9 @@ class _TasksScreenState extends State<TasksScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+                 Center(
+                  child: Chip(label: Text("${state.allTasks.length} Tasks",)),
+                ),
                 TaskList(tasksList: taskList),
               ],
             ),
