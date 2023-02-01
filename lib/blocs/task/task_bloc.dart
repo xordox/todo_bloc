@@ -20,10 +20,24 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   void _onUpdateTask(UpdateTask event, Emitter<TaskState> emit){
+    final state = this.state;
+    final task = event.task;
+//index is used to reposition updated task in previous index
+final int index = state.allTasks.indexOf(task);
+    List<Task> allTasks = List.from(state.allTasks)..remove(task);
+    task.isDone == false
+    //.add won't maintain previous index of task
+    //allTasks.add(task.copyWith(isDone: false)); 
+    ? allTasks.insert(index,task.copyWith(isDone: true))
+    : allTasks.insert(index,task.copyWith(isDone: false));
+
+
+    emit(TaskState(allTasks: allTasks));
+
 
   }
 
   void _onDeleteTask(DeleteTask event, Emitter<TaskState> emit){
-    
+
   }
 }
