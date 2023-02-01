@@ -25,7 +25,7 @@ class AppDrawer extends StatelessWidget {
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () => Navigator.of(context).pushNamed(TasksScreen.id),
-                  child:  ListTile(
+                  child: ListTile(
                     leading: const Icon(
                       Icons.folder_special,
                     ),
@@ -35,16 +35,20 @@ class AppDrawer extends StatelessWidget {
                 );
               },
             ),
-            Divider(),
-            GestureDetector(
-              onTap: () => Navigator.of(context).pushNamed(RecycleBin.id),
-              child: const ListTile(
-                leading: Icon(
-                  Icons.delete,
-                ),
-                title: Text("Bin"),
-                trailing: Text("0"),
-              ),
+            const Divider(),
+            BlocBuilder<TaskBloc, TaskState>(
+              builder: (context, state) {
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).pushNamed(RecycleBin.id),
+                  child:  ListTile(
+                    leading: const Icon(
+                      Icons.delete,
+                    ),
+                    title: const Text("Bin"),
+                    trailing: Text("${state.removedTasks.length}"),
+                  ),
+                );
+              },
             ),
           ],
         ),

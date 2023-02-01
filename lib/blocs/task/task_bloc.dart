@@ -10,12 +10,14 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
     on<AddTask>(_onAddTask);
     on<UpdateTask>(_onUpdateTask);
     on<DeleteTask>(_onDeleteTask);
+    on<RemoveTask>(_onRemoveTask);
   }
 
   void _onAddTask(AddTask event, Emitter<TaskState> emit){
     final state = this.state;
     emit(TaskState(
       allTasks: List.from(state.allTasks)..add(event.task),
+      removedTasks: state.removedTasks,
     ));
   }
 
@@ -32,14 +34,24 @@ final int index = state.allTasks.indexOf(task);
     : allTasks.insert(index,task.copyWith(isDone: false));
 
 
-    emit(TaskState(allTasks: allTasks));
+    emit(TaskState(allTasks: allTasks,removedTasks: state.removedTasks),);
 
 
   }
 
   void _onDeleteTask(DeleteTask event, Emitter<TaskState> emit){
     final state = this.state;
-    emit(TaskState(allTasks: List.from(state.allTasks)..remove(event.task)));
+    emit(TaskState(allTasks: state.allTasks,
+    removedTasks: List.from(state.removedTasks)..remove(event.task),
+    ));
+  }
+
+  void _onRemoveTask(RemoveTask event, Emitter<TaskState> emit){
+    final state = this.state;
+    emit(TaskState(
+      allTasks: List.from(state.allTasks)..remove(event.task),
+      removedTasks: List.from(state.removedTasks)
+      ..add(event.task.copyWith(isDeleted: true))));
   }
 
   @override
