@@ -38,6 +38,7 @@ final int index = state.allTasks.indexOf(task);
   }
 
   void _onDeleteTask(DeleteTask event, Emitter<TaskState> emit){
-
+    final state = this.state;
+    emit(TaskState(allTasks: List.from(state.allTasks)..remove(event.task)));
   }
 }
