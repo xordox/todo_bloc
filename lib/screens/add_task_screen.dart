@@ -1,25 +1,29 @@
-
 import 'package:flutter/material.dart';
 import 'package:todo_bloc/blocs/bloc_barrier.dart';
 import 'package:todo_bloc/models/task.dart';
+import 'package:todo_bloc/services/guid_gen.dart';
 
 class AddTaskScreen extends StatelessWidget {
   const AddTaskScreen({
     Key? key,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-  TextEditingController titleController = TextEditingController();
+    TextEditingController titleController = TextEditingController();
 
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Text("Add Task", style: TextStyle(fontSize: 24),),
-          const SizedBox(height: 10,),
+          const Text(
+            "Add Task",
+            style: TextStyle(fontSize: 24),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           TextField(
             autofocus: true,
             controller: titleController,
@@ -31,12 +35,21 @@ class AddTaskScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              TextButton(onPressed: ()=> Navigator.pop(context), child: const Text("Cancel"),),
-              ElevatedButton(onPressed: (){
-                Task task = Task(title: titleController.text,);
-                context.read<TaskBloc>().add(AddTask(task: task));
-                Navigator.pop(context);
-              }, child: const Text("Add"),),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Task task = Task(
+                    title: titleController.text,
+                    id: GUIDGen.generate(),
+                  );
+                  context.read<TaskBloc>().add(AddTask(task: task));
+                  Navigator.pop(context);
+                },
+                child: const Text("Add"),
+              ),
             ],
           )
         ],
