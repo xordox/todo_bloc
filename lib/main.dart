@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todo_bloc/blocs/task_bloc_observer.dart';
 import 'package:todo_bloc/screens/tasks_screen.dart';
+import 'package:todo_bloc/services/app_router.dart';
 
 import 'blocs/bloc_barrier.dart';
 
@@ -11,13 +12,14 @@ void main() async {
       storageDirectory: await getApplicationDocumentsDirectory());
   Bloc.observer = TaskBlocObserver();
   HydratedBlocOverrides.runZoned(
-    () => runApp(const MyApp()),
+    () => runApp( MyApp(appRouter: AppRouter(),)),
     storage: storage,
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, required this.appRouter}) : super(key: key);
+  final AppRouter appRouter;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: const TasksScreen(),
+        onGenerateRoute: appRouter.onGenerateRoute,
       ),
     );
   }

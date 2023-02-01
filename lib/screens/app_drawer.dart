@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_bloc/screens/recycle_bin.dart';
+import 'package:todo_bloc/screens/tasks_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({ Key? key }) : super(key: key);
@@ -16,16 +18,22 @@ class AppDrawer extends StatelessWidget {
               child: Text("Task Drawer",
               style: Theme.of(context).textTheme.headline5,),
             ),
-            const ListTile(
-              leading: Icon(Icons.folder_special,),
-              title: Text("My Tasks"),
-              trailing: Text("0"),
+            GestureDetector(
+              onTap: ()=>Navigator.of(context).pushNamed(TasksScreen.id),
+              child: const ListTile(
+                leading: Icon(Icons.folder_special,),
+                title: Text("My Tasks"),
+                trailing: Text("0"),
+              ),
             ),
             Divider(),
-            const ListTile(
-              leading: Icon(Icons.delete,),
-              title: Text("Bin"),
-              trailing: Text("0"),
+            GestureDetector(
+              onTap: ()=> Navigator.of(context).pushNamed(RecycleBin.id),
+              child: const ListTile(
+                leading: Icon(Icons.delete,),
+                title: Text("Bin"),
+                trailing: Text("0"),
+              ),
             ),
           ],
         ),

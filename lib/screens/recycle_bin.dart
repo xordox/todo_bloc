@@ -4,6 +4,7 @@ import 'package:todo_bloc/widgets/task_list.dart';
 
 class RecycleBin extends StatelessWidget {
   const RecycleBin({ Key? key }) : super(key: key);
+  static const id = 'recycle_bin_screen';
 
   @override
   Widget build(BuildContext context) {
