@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todo_bloc/blocs/task_bloc_observer.dart';
 import 'package:todo_bloc/screens/tabs_screen.dart';
-import 'package:todo_bloc/screens/tasks_screen.dart';
+import 'package:todo_bloc/screens/pending_tasks_screen.dart';
 import 'package:todo_bloc/services/app_router.dart';
 import 'package:todo_bloc/services/app_theme.dart';
 
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             theme: state.darkMode?
             AppThemes.appThemeData[AppTheme.darkTheme]
             :AppThemes.appThemeData[AppTheme.lightTheme],
-            home: const TabsScreen(),
+            home:  TabsScreen(),
             onGenerateRoute: appRouter.onGenerateRoute,
           );
         },

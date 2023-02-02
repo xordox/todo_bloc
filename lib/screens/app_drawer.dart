@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_bloc/blocs/bloc_barrier.dart';
 import 'package:todo_bloc/screens/tabs_screen.dart';
 import 'package:todo_bloc/screens/recycle_bin.dart';
-import 'package:todo_bloc/screens/tasks_screen.dart';
+import 'package:todo_bloc/screens/pending_tasks_screen.dart';
 
 class AppDrawer extends StatelessWidget{
   @override
@@ -30,7 +30,7 @@ class AppDrawer extends StatelessWidget{
                       Icons.folder_special,
                     ),
                     title: const Text("My Tasks"),
-                    trailing: Text("${state.allTasks.length}"),
+                    trailing: Text("${state.pendingTasks.length} | ${state.completedTasks.length}"),
                   ),
                 );
               },

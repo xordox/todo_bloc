@@ -22,7 +22,7 @@ class Task extends Equatable {
     bool? isDeleted,
   }) {
     return Task(
-      id: id ?? this.id,
+      id: id ,
       title: title ?? this.title,
       isDone: isDone ?? this.isDone,
       isDeleted: isDeleted ?? this.isDeleted,
