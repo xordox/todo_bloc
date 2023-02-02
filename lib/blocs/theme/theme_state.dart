@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 part of 'theme_bloc.dart';
 
 class ThemeState extends Equatable {
