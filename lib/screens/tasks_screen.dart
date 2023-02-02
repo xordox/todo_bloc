@@ -14,46 +14,21 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  void _addTask(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => SingleChildScrollView(
-        child: Container(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: const AddTaskScreen(),
-        ),
-      ),
-    );
-  }
+  
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, state) {
         List<Task> taskList = state.allTasks;
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text("Task App"),
-            actions: [IconButton(onPressed: () => _addTask(context), icon: Icon(Icons.add))],
-          ),
-          drawer:  AppDrawer(),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                 Center(
-                  child: Chip(label: Text("${state.allTasks.length} Tasks",)),
-                ),
-                TaskList(tasksList: taskList),
-              ],
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+             Center(
+              child: Chip(label: Text("${state.allTasks.length} Tasks",)),
             ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => _addTask(context),
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
+            TaskList(tasksList: taskList),
+          ],
         );
       },
     );

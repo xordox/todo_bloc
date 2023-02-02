@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_bloc/blocs/bloc_barrier.dart';
+import 'package:todo_bloc/screens/tabs_screen.dart';
 import 'package:todo_bloc/screens/recycle_bin.dart';
 import 'package:todo_bloc/screens/tasks_screen.dart';
 
@@ -23,7 +24,7 @@ class AppDrawer extends StatelessWidget{
               builder: (context, state) {
                 return GestureDetector(
                   onTap: () => Navigator.of(context)
-                      .pushReplacementNamed(TasksScreen.id),
+                      .pushReplacementNamed(TabsScreen.id),
                   child: ListTile(
                     leading: const Icon(
                       Icons.folder_special,
