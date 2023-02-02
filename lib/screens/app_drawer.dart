@@ -3,9 +3,15 @@ import 'package:todo_bloc/blocs/bloc_barrier.dart';
 import 'package:todo_bloc/screens/recycle_bin.dart';
 import 'package:todo_bloc/screens/tasks_screen.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
+  @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+   bool _switchValue = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,6 +56,11 @@ class AppDrawer extends StatelessWidget {
                 );
               },
             ),
+            Switch(value: _switchValue, onChanged: (newValue){
+              setState(() {
+                _switchValue = newValue;
+              });
+            })
           ],
         ),
       ),
