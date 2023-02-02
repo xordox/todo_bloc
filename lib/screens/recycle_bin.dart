@@ -21,7 +21,7 @@ class RecycleBin extends StatelessWidget {
               )
             ],
           ),
-          drawer: const AppDrawer(),
+          drawer:  AppDrawer(),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

@@ -3,15 +3,7 @@ import 'package:todo_bloc/blocs/bloc_barrier.dart';
 import 'package:todo_bloc/screens/recycle_bin.dart';
 import 'package:todo_bloc/screens/tasks_screen.dart';
 
-class AppDrawer extends StatefulWidget {
-  const AppDrawer({Key? key}) : super(key: key);
-
-  @override
-  State<AppDrawer> createState() => _AppDrawerState();
-}
-
-class _AppDrawerState extends State<AppDrawer> {
-   bool _switchValue = false;
+class AppDrawer extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,7 +22,8 @@ class _AppDrawerState extends State<AppDrawer> {
             BlocBuilder<TaskBloc, TaskState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacementNamed(TasksScreen.id),
+                  onTap: () => Navigator.of(context)
+                      .pushReplacementNamed(TasksScreen.id),
                   child: ListTile(
                     leading: const Icon(
                       Icons.folder_special,
@@ -45,8 +38,9 @@ class _AppDrawerState extends State<AppDrawer> {
             BlocBuilder<TaskBloc, TaskState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.of(context).pushReplacementNamed(RecycleBin.id),
-                  child:  ListTile(
+                  onTap: () =>
+                      Navigator.of(context).pushReplacementNamed(RecycleBin.id),
+                  child: ListTile(
                     leading: const Icon(
                       Icons.delete,
                     ),
@@ -56,11 +50,16 @@ class _AppDrawerState extends State<AppDrawer> {
                 );
               },
             ),
-            Switch(value: _switchValue, onChanged: (newValue){
-              setState(() {
-                _switchValue = newValue;
-              });
-            })
+            BlocBuilder<ThemeBloc, ThemeState>(
+              builder: (context, state) {
+                return Switch(
+                    value: state.darkMode,
+                    onChanged: (newValue) {
+                      newValue? context.read<ThemeBloc>().add(DarkThemeEvent())
+                      :context.read<ThemeBloc>().add(LightThemeEvent());
+                    },);
+              },
+            )
           ],
         ),
       ),
