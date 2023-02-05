@@ -15,10 +15,14 @@ class RecycleBin extends StatelessWidget {
           appBar: AppBar(
             title: const Text("Recycle Bin"),
             actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.add),
-              )
+              PopupMenuButton(itemBuilder: (context) => [
+                PopupMenuItem(child: TextButton.icon(onPressed: null,
+                icon: const Icon(Icons.delete_forever), 
+                label: const Text("Delete all tasks"),),
+                onTap: ()=> context
+                .read<TaskBloc>()
+                .add(DeleteAllTasks()),),
+              ])
             ],
           ),
           drawer:  AppDrawer(),
